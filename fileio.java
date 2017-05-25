@@ -47,6 +47,8 @@ public class fileio {
         System.out.println("Hello File IO");
         fileio fileio = new fileio();
         fileio.printMenu();
+        int userInput = fileio.getInt(1,5);
+        fileio.userSelection(userInput);
     }
 
     public fileio() {
@@ -60,13 +62,60 @@ public class fileio {
                 "2. Add new contact.\n" +
                 "3. Search a contact by name.\n" +
                 "4. Delete an existing contact.\n" +
-                "5. Exit."
+                "5. Exit.\n"
         );
+        System.out.print("Enter an option 1-5: ");
     }
 
-    protected void printContacts() {
+    public void printContacts() {
         System.out.printf("Name | Phone number\n" +
                 "--------------------");
+    }
+
+    public void userSelection(int userInput) {
+        switch(userInput){
+            case 1:
+//                View Contacts
+                this.printContacts();
+                break;
+            case 2:
+//                Add a new contact
+
+                break;
+            case 3:
+//                Search a contact by name
+                break;
+            case 4:
+//                Delete an existing contact
+                break;
+            case 5:
+//                Exit
+                break;
+        }
+    }
+
+
+    public String getString() {
+        return this.scanner.nextLine();
+    }
+
+
+    public int getInt(int min, int max){
+        int num;
+        try {
+            String possibleNumber = this.getString();
+            num = Integer.valueOf(possibleNumber);
+        } catch (NumberFormatException e) {
+            System.out.print("Please enter a number between " + min + " and " + max + ": ");
+            return getInt(min, max);
+        }
+
+        if(num >= min && num <= max){
+            return num;
+        }
+
+        System.out.println(num + " number out of range, try again");
+        return getInt(min, max);
     }
 
 }
