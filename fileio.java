@@ -33,27 +33,11 @@ public class fileio {
     private Scanner scanner;
     private List contacts;
 
-    // Conditionally create files
-    /*
-    if (! Files.exists(dataFile)) {
-        Files.createFile(dataFile);
-    }
-
-    List<String> lines = Files.readAllLines(dataFile);
-
-    for(String line : lines) {
-        System.out.println(line);
-    }
-    */
-
-
     public static void main(String[] args) {
-        System.out.println("Hello File IO");
         fileio fileio = new fileio();
 
-        // The name of the file to open.
+        // Read contents from contacts file
         String fileName = "./data/contacts.txt";
-
         if (! Files.exists(Paths.get(fileName))) {
             try {
                 Files.createFile(Paths.get(fileName));
@@ -61,11 +45,13 @@ public class fileio {
                 System.out.println(e);
             }
         }
+        fileio.contacts = fileio.readContacts(fileName);
 
-        fileio.readContacts(fileName);
-
+        // Ask for user input
         fileio.printMenu();
         int userInput = fileio.getInt(1,5);
+
+        // Execute user selection
         fileio.userSelection(userInput);
     }
 
@@ -76,9 +62,8 @@ public class fileio {
     public void readContacts(String filename) {
         List lines;
         try {
-            System.out.println("Reading contacts");
             lines = Files.readAllLines(Paths.get(filename));
-            System.out.println(lines);
+            return lines;
         } catch (Exception e) { // catch em all
             System.out.println("Some exception was thrown" + e);
         }
@@ -100,6 +85,7 @@ public class fileio {
     public void printContacts() {
         System.out.printf("Name | Phone number\n" +
                 "--------------------");
+        System.out.println(this.contacts);
     }
 
     public void userSelection(int userInput) {
@@ -124,11 +110,9 @@ public class fileio {
         }
     }
 
-
     public String getString() {
         return this.scanner.nextLine();
     }
-
 
     public int getInt(int min, int max){
         int num;
