@@ -1,8 +1,8 @@
 /**
  * File IO
  *
- * Compiliation: javac FileIO_exercise.java
- * Execution: java FileIO_exercise
+ * Compiliation: javac fileio.java
+ * Execution: java fileio
  *
  * Command line application to keep track of contacts.
  * Each contact is a name and phone number.
@@ -22,8 +22,9 @@
  */
 
 import java.util.Scanner;
+import java.util.List;
 
-public class FileIO_exercise {
+public class fileio {
 
     private Scanner scanner;
     private List contacts;
@@ -44,11 +45,11 @@ public class FileIO_exercise {
 
     public static void main(String[] args) {
         System.out.println("Hello File IO");
-        FileIO_exercise fileio = new FileIO_exercise();
+        fileio fileio = new fileio();
         fileio.printMenu();
     }
 
-    public FileIO_exercise {
+    public fileio() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -66,8 +67,6 @@ public class FileIO_exercise {
     protected void printContacts() {
         System.out.printf("Name | Phone number\n" +
                 "--------------------");
-        // Loop for contacts
-        System.out.printf(contact.name + " | " + contact.phone);
     }
 
 }
