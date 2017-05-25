@@ -101,6 +101,16 @@ public class fileio {
         }
     }
 
+    public void searchContacts() {
+        System.out.println("Enter name to search: ");
+        String userSearch = scanner.nextLine();
+        for (Object contact : contacts) {
+            if (String.valueOf(contact).contains(userSearch)) {
+                System.out.println(contact);
+            }
+        }
+    }
+
     public void userSelection(int userInput) {
         switch(userInput){
             case 1:
@@ -113,6 +123,7 @@ public class fileio {
                 break;
             case 3:
 //                Search a contact by name
+                this.searchContacts();
                 break;
             case 4:
 //                Delete an existing contact
