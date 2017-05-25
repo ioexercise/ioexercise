@@ -23,7 +23,6 @@
 
 import java.util.Scanner;
 import java.util.List;
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
@@ -59,15 +58,14 @@ public class fileio {
         this.scanner = new Scanner(System.in);
     }
 
-    public void readContacts(String filename) {
-        List lines;
+    public List readContacts(String filename) {
+        List lines = null;
         try {
             lines = Files.readAllLines(Paths.get(filename));
-            return lines;
         } catch (Exception e) { // catch em all
             System.out.println("Some exception was thrown" + e);
         }
-
+        return lines;
     }
 
     // function: prints menu
@@ -84,8 +82,10 @@ public class fileio {
 
     public void printContacts() {
         System.out.printf("Name | Phone number\n" +
-                "--------------------");
-        System.out.println(this.contacts);
+                "--------------------\n");
+        for (Object contact : contacts) {
+            System.out.println(contact);
+        }
     }
 
     public void userSelection(int userInput) {
