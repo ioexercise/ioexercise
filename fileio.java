@@ -23,6 +23,7 @@
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
@@ -46,12 +47,15 @@ public class fileio {
         }
         fileio.contacts = fileio.readContacts(fileName);
 
-        // Ask for user input
-        fileio.printMenu();
-        int userInput = fileio.getInt(1,5);
+        int userInput;
+        do {
+            // Ask for user input
+            fileio.printMenu();
+            userInput = fileio.getInt(1,5);
 
-        // Execute user selection
-        fileio.userSelection(userInput);
+            // Execute user selection
+            fileio.userSelection(userInput);
+        } while(userInput != 5);
     }
 
     public fileio() {
@@ -80,6 +84,15 @@ public class fileio {
         System.out.print("Enter an option 1-5: ");
     }
 
+    public String newContact() {
+        System.out.println("Please enter new contact name and phone number on one line: ");
+        return scanner.nextLine();
+    }
+
+    public void addContact(String newContact) {
+        this.contacts.add(newContact);
+    }
+
     public void printContacts() {
         System.out.printf("Name | Phone number\n" +
                 "--------------------\n");
@@ -96,7 +109,7 @@ public class fileio {
                 break;
             case 2:
 //                Add a new contact
-
+                this.addContact(this.newContact());
                 break;
             case 3:
 //                Search a contact by name
