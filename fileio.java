@@ -21,8 +21,11 @@
  *      will need to enter a number between 1 and 5.
  */
 
+
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -111,6 +114,42 @@ public class fileio {
         }
     }
 
+    public void removeContacts() {
+        System.out.println("Enter name to remove: ");
+        Object deleteContact = null;
+        String userSearch = scanner.nextLine();
+        for (Object contact : contacts) {
+            if (String.valueOf(contact).contains(userSearch)) {
+                deleteContact = contact;
+            }
+        }
+        contacts.remove(deleteContact);
+    }
+
+    public void writeToFile() {
+        System.out.println("Writing to file..");
+        System.out.println("all done.");
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter("./data/contacts.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(Object contact: contacts) {
+            try {
+                writer.write(String.valueOf(contact)+ "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void userSelection(int userInput) {
         switch(userInput){
             case 1:
@@ -127,9 +166,11 @@ public class fileio {
                 break;
             case 4:
 //                Delete an existing contact
+                this.removeContacts();
                 break;
             case 5:
 //                Exit
+                this.writeToFile();
                 break;
         }
     }
