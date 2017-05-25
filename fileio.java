@@ -23,6 +23,10 @@
 
 import java.util.Scanner;
 import java.util.List;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class fileio {
 
@@ -46,6 +50,20 @@ public class fileio {
     public static void main(String[] args) {
         System.out.println("Hello File IO");
         fileio fileio = new fileio();
+
+        // The name of the file to open.
+        String fileName = "./data/contacts.txt";
+
+        if (! Files.exists(Paths.get(fileName))) {
+            try {
+                Files.createFile(Paths.get(fileName));
+            } catch(IOException e) {
+                System.out.println(e);
+            }
+        }
+
+        fileio.readContacts(fileName);
+
         fileio.printMenu();
         int userInput = fileio.getInt(1,5);
         fileio.userSelection(userInput);
@@ -53,6 +71,18 @@ public class fileio {
 
     public fileio() {
         this.scanner = new Scanner(System.in);
+    }
+
+    public void readContacts(String filename) {
+        List lines;
+        try {
+            System.out.println("Reading contacts");
+            lines = Files.readAllLines(Paths.get(filename));
+            System.out.println(lines);
+        } catch (Exception e) { // catch em all
+            System.out.println("Some exception was thrown" + e);
+        }
+
     }
 
     // function: prints menu
